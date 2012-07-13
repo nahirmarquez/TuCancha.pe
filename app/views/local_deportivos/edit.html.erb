@@ -1,0 +1,21 @@
+<%= content_for :header do %>
+  <%= link_to 'Regresar', local_deportivos_path %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Nuevo Local Deportivo', new_local_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+
+<% end %>
+
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Edición de Local Deportivo</li>
+<li>
+<%= render 'form' %>
+</li>
+</ul>
+    
+ 
+<%= content_for :footer do %>
+
+<%= link_to 'Mostrar', @local_deportivo %> |
+<%= link_to 'Eliminar', @local_deportivo, confirm: '¿Está seguro que desea eliminar el local deportivo?', method: :delete %> |
+
+<% end %>

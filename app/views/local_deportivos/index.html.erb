@@ -1,0 +1,24 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Nuevo Local Deportivo', new_local_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+<% end %>
+      
+<ul data-role="listview" data-filter="true" data-inset="true">
+<li data-role="list-divider">Listado de Locales Deportivos</li>
+<% @local_deportivos.each do |local_deportivo| %>
+    <li>
+    	<a href='<%= local_deportivo_path(local_deportivo) %>'>    	
+    	<%= image_tag("futbol.jpg", :height => '100', :width => '100') %>    	
+    	<h3><%= local_deportivo.nombre %></h3>
+	    <p>Dirección: <%= local_deportivo.direccion %></p>	    
+	    <p>Telefono: <%= local_deportivo.telefono %></p>
+	    <p>Email: <%= local_deportivo.email %></p>
+	    <!--<%= link_to 'Mostrar', local_deportivo %>-->
+	    </a>
+	    <!--<%= link_to 'Eliminar', local_deportivo, confirm: '¿Está seguro que desea eliminar el local deportivo?', method: :delete %>-->
+	    <p><%= link_to 'Editar', edit_local_deportivo_path(local_deportivo) %></p>
+	</li>
+  
+<% end %>
+</ul>

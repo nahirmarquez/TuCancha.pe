@@ -1,0 +1,44 @@
+<%= form_for(@local_deportivo) do |f| %>
+  <% if @local_deportivo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@local_deportivo.errors.count, "error") %> prohibited this local_deportivo from being saved:</h2>
+
+      <ul>
+      <% @local_deportivo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Nombre</legend>
+    <%= f.text_field :nombre %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Dirección</legend>
+    <%= f.text_field :direccion %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Descripción</legend>
+    <%= f.text_area :descripcion %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Servicios</legend>
+    <%= f.text_area :servicios %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Contacto</legend>
+    <%= f.text_field :contacto %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Telefono</legend>
+    <%= f.text_field :telefono %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>E-mail</legend>
+    <%= f.text_field :email %>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+  </div>
+<% end %>

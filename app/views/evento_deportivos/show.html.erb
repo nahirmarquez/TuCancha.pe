@@ -1,0 +1,39 @@
+<%= content_for :header do %>
+    <%= link_to 'Locales Deportivos', evento_deportivos_path, 'data-icon'=> 'back'  %>
+  <h1>Información del Evento Deportivo</h1>    
+	<%= link_to 'Editar', edit_evento_deportivo_path(@evento_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
+<% end %>
+    	
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Información</li>
+<li>
+<h1>  
+  <%= @evento_deportivo.nombre %>
+</h1>
+<p>
+  <b>Fecha inicio:</b>
+  <%= @evento_deportivo.fecha_inicio %>
+</p>
+
+<p>
+  <b>Fecha fin:</b>
+  <%= @evento_deportivo.fecha_fin %>
+</p>
+
+<p>
+  <b>Lugar:</b>
+  <%= @evento_deportivo.lugar %>
+</p>
+
+<p>
+  <b>Horario:</b>
+  <%= @evento_deportivo.horario %>
+</p>
+
+<p>
+  <b>Detalles adicionales:</b>
+  <%= @evento_deportivo.detalles_adicionales %>
+</p>
+
+</li>
+</ul>

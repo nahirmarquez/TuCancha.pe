@@ -1,0 +1,22 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+<% end %>
+      
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Listado de Espacios Deportivos</li>
+<% @espacio_deportivos.each do |espacio_deportivo| %>
+  <li>
+  	<a href='<%= espacio_deportivo_path(espacio_deportivo) %>'>
+    <h3><%= espacio_deportivo.nombre %></h3>
+    <p>Costo: <%= espacio_deportivo.costo %></p>
+    <p>Capacidad: <%= espacio_deportivo.capacidad %></p>
+    <p>Descripción: <%= espacio_deportivo.descripcion %></p>
+    <p>Local Deportivo: <%= espacio_deportivo.local_deportivo_id %></p>
+    </a>
+    <p><%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %></p>    
+  </li>
+
+<% end %>
+</ul>	

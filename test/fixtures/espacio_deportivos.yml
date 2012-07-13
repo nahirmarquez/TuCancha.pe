@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  costo: 9.99
+  capacidad: 1
+  descripcion: MyString
+  local_deportivo_id: 1
+
+two:
+  nombre: MyString
+  costo: 9.99
+  capacidad: 1
+  descripcion: MyString
+  local_deportivo_id: 1

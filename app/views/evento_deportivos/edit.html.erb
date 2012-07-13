@@ -1,0 +1,20 @@
+<%= content_for :header do %>
+  <%= link_to 'Regresar', evento_deportivos_path %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Nuevo Evento Deportivo', new_evento_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+
+<% end %>
+
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Edición del Evento Deportivo</li>
+<li>
+<%= render 'form' %>
+</li>
+</ul>
+
+
+<%= content_for :footer do %>
+
+<%= link_to 'Mostrar', @evento_deportivo %> |
+<%= link_to 'Eliminar', @evento_deportivo, confirm: '¿Está seguro que desea eliminar el evento deportivo?', method: :delete %> |
+<% end %>

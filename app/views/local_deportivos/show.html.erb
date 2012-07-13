@@ -1,0 +1,49 @@
+<%= content_for :header do %>
+    <%= link_to 'Locales Deportivos', local_deportivos_path, 'data-icon'=> 'back'  %>
+  <h1>Información del local Deportivo</h1>    
+	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
+<% end %>
+    	
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Información</li>
+<li>
+	  <%= image_tag("futbol.jpg", :height => '200', :width => '200') %>
+	  <h1>
+	  	<%= @local_deportivo.nombre %>
+	  </h1>	  	
+	<p>
+	  <b>Direccion:</b>
+	  <%= @local_deportivo.direccion %>
+	</p>
+	<p>
+	  <b>Telefono:</b>
+	  <%= @local_deportivo.telefono %>
+	</p>
+	<p>
+	  <b>Contacto:</b>
+	  <%= @local_deportivo.contacto %>
+	</p>
+	<p>
+	  <b>Email:</b>
+	  <%= @local_deportivo.email %>
+	</p>
+</li>
+<li data-role="list-divider">Detalle</li>
+<li>
+	<p>
+	  <b>Descripcion:</b>
+	  <%= @local_deportivo.descripcion %>
+	</p>
+</li>
+<li data-role="list-divider">Servicios</li>
+<li>
+	<p>
+<% @local_deportivo.servicios.split(/,/).each do |servicio| %>
+<p>
+    <%= image_tag("check.jpg") %> 
+	<%= servicio %>
+</p>
+<% end %>
+	</p>	
+</li>
+</ul>

@@ -1,0 +1,41 @@
+<%= form_for(@evento_deportivo) do |f| %>
+  <% if @evento_deportivo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@evento_deportivo.errors.count, "error") %> prohibited this evento_deportivo from being saved:</h2>
+
+      <ul>
+      <% @evento_deportivo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Nombre</legend>
+    <%= f.text_field :nombre %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Fecha de inicio</legend>
+    <%= f.date_select :fecha_inicio %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Fecha de fin</legend>
+    <%= f.date_select :fecha_fin %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Lugar</legend>
+    <%= f.text_field :lugar %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Horario</legend>
+    <%= f.text_field :horario %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Detalles adicionales</legend>
+    <%= f.text_area :detalles_adicionales %>
+  </fieldset>
+  <div class="actions">
+    <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+  </div>
+<% end %>

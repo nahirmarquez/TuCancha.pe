@@ -1,0 +1,23 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Eventos Deportivos</h1>
+  <%= link_to 'Nuevo Evento Deportivo', new_evento_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+
+<% end %>
+
+
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Listado de Eventos Deportivos</li>
+<% @evento_deportivos.each do |evento_deportivo| %>
+  <li>
+  	<a href='<%= evento_deportivo_path(evento_deportivo	) %>'>
+    <h3><%= evento_deportivo.nombre %></h3>
+    <p>Fecha de Inicio: <%= evento_deportivo.fecha_inicio %></p>
+    <p>Fecha de Fin: <%= evento_deportivo.fecha_fin %></p>
+    <p>Lugar: <%= evento_deportivo.lugar %></p>
+    <p>Horario: <%= evento_deportivo.horario %></p>	
+    </a>    
+    <p><%= link_to 'Editar', edit_evento_deportivo_path(evento_deportivo) %></p>
+  </li>
+<% end %>
+</ul>

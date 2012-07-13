@@ -1,0 +1,12 @@
+<%= content_for :header do %>
+  <%= link_to 'Regresar', evento_deportivos_path %>
+  <h1>Eventos Deportivos</h1>
+<% end %>
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Nuevo Evento Deportivo</li>
+<li>
+<%= render 'form' %>
+</li>
+</ul>
+
+

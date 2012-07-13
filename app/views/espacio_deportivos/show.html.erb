@@ -1,0 +1,34 @@
+<%= content_for :header do %>
+    <%= link_to 'Espacios Deportivos', espacio_deportivos_path, 'data-icon'=> 'back'  %>
+  <h1>Información del Espacio Deportivo</h1>    
+	<%= link_to 'Editar', edit_espacio_deportivo_path(@espacio_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
+<% end %>
+    	
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Información</li>
+<li>
+<h1>
+  <%= @espacio_deportivo.nombre %>
+</h1>
+
+<p>
+  <b>Costo:</b>
+  <%= @espacio_deportivo.costo %>
+</p>
+
+<p>
+  <b>Capacidad:</b>
+  <%= @espacio_deportivo.capacidad %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%= @espacio_deportivo.descripcion %>
+</p>
+
+<p>
+  <b>Local deportivo:</b>
+  <%= @espacio_deportivo.local_deportivo_id %>
+</p>
+</li>
+</ul>

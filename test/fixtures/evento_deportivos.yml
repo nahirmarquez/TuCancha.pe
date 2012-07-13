@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nombre: MyString
+  fecha_inicio: 2012-07-12
+  fecha_fin: 2012-07-12
+  lugar: MyString
+  horario: MyString
+  detalles_adicionales: MyText
+
+two:
+  nombre: MyString
+  fecha_inicio: 2012-07-12
+  fecha_fin: 2012-07-12
+  lugar: MyString
+  horario: MyString
+  detalles_adicionales: MyText
