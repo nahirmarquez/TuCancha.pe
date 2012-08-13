@@ -1,0 +1,20 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Busqueda de Locales Deportivos</h1>  
+<% end %>
+      
+<ul data-role="listview" data-filter="true" data-inset="true">
+<li data-role="list-divider">Listado de Locales Deportivos</li>
+<% @local_deportivos.each do |local_deportivo| %>
+    <li>
+    	<a href='<%= local_deportivo_path(local_deportivo) %>'>    	
+    	<%= image_tag("futbol.jpg", :height => '100', :width => '100') %>    	
+    	<h3><%= local_deportivo.nombre %></h3>
+	    <p>Dirección: <%= local_deportivo.direccion %></p>	    
+	    <p>Telefono: <%= local_deportivo.telefono %></p>
+	    <p>Email: <%= local_deportivo.email %></p>
+	    </a>
+	</li>
+  
+<% end %>
+</ul>

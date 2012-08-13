@@ -1,0 +1,25 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+<% end %>
+
+
+<ul>
+<li>
+	<%= link_to 'Reserva tu cancha', busqueda_path, 'data-role'=>'button', 'data-icon'=>'search' %>	
+</li>
+<li>
+	<%= link_to 'Eventos Deportivos', evento_deportivos_path, 'data-role'=>'button', 'data-icon'=>'info' %>	
+</li>
+<li>
+	<%= link_to 'Mis reservas', '', 'data-role'=>'button', 'data-icon'=>'check' %>	
+</li>
+<li>
+	<%= link_to 'Mis canchas favoritas', '', 'data-role'=>'button', 'data-icon'=>'star' %>	
+</li>
+<li>
+	<%= link_to 'Registra tu cancha', local_deportivos_path, 'data-role'=>'button', 'data-icon'=>'grid' %>
+<p align="center">
+	<%= image_tag("banner.jpg") %>
+</p>	
+</li>
+</ul>	

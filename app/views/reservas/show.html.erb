@@ -1,0 +1,31 @@
+<%= content_for :header do %>
+    <%= link_to 'Locales Deportivos', local_deportivos_path, 'data-icon'=> 'back'  %>
+  	<h1>Información de la reserva realizada</h1>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Local Deportivo:</b>
+  <%= @local_deportivo.nombre %>
+</p>
+
+<p>
+  <b>Espacio deportivo:</b>
+  <%= @espacio_deportivo.nombre %>
+</p>
+
+<p>
+  <b>Fecha reserva:</b>
+  <%= @reserva.fecha %>
+</p>
+
+<p>
+  <b>Hora inicio:</b>
+  <%= @reserva.hora_inicio %>
+</p>
+
+<p>
+  <b>Hora fin:</b>
+  <%= @reserva.hora_fin %>
+</p>

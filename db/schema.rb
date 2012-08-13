@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120712080552) do
+ActiveRecord::Schema.define(:version => 20120812021731) do
 
   create_table "espacio_deportivos", :force => true do |t|
     t.string   "nombre"
@@ -44,6 +44,28 @@ ActiveRecord::Schema.define(:version => 20120712080552) do
     t.string   "email"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "latitud"
+    t.string   "longitud"
+  end
+
+  create_table "reservas", :force => true do |t|
+    t.integer  "espacio_deportivo_id"
+    t.string   "uid"
+    t.date     "fecha"
+    t.string   "hora_inicio"
+    t.string   "hora_fin"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end

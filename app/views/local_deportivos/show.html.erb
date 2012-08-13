@@ -3,7 +3,63 @@
   <h1>Información del local Deportivo</h1>    
 	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
 <% end %>
-    	
+
+<script type="text/javascript">
+	var map;
+    $(document).ready(function(){
+    map = new GMaps({
+        div: '#map',
+        lat: '<%= @local_deportivo.latitud %>',
+        lng: '<%= @local_deportivo.longitud %>',   
+        height: '500px',   
+        zoomControl : true,
+        zoomControlOpt: {
+            style : 'SMALL',
+            position: 'TOP_LEFT'
+        },
+        panControl : false,
+        streetViewControl : false,
+        mapTypeControl: false,
+        overviewMapControl: false
+      });
+      map.addMarker({
+        lat: '<%= @local_deportivo.latitud %>',
+        lng: '<%= @local_deportivo.longitud %>',
+        title: '<%= @local_deportivo.direccion %>',
+        click: function(e){
+          if(console.log)
+            console.log(e);
+          alert('<%= @local_deportivo.direccion %>');
+        }
+      });
+      map.addControl({
+        position: 'top_right',
+        text: 'Geolocate',
+        style: {
+          margin: '5px',
+          padding: '1px 6px',
+          border: 'solid 1px #717B87',
+          background: '#fff'
+        },
+        events: {
+          click: function(){
+            GMaps.geolocate({
+              success: function(position){
+                map.setCenter(position.coords.latitude, position.coords.longitude);
+              },
+              error: function(error){
+                alert('Geolocalización falló: ' + error.message);
+              },
+              not_supported: function(){
+                alert("El explorador no soporta geolocalización");
+              }
+            });
+          }
+        }
+      });
+    });
+</script>
+  
 <ul data-role="listview" data-inset="true">
 <li data-role="list-divider">Información</li>
 <li>
@@ -27,6 +83,9 @@
 	  <b>Email:</b>
 	  <%= @local_deportivo.email %>
 	</p>
+	<p align="right">
+		<a href="../espacio_deportivos">Listado de Espacios Deportivos</a>
+	</p>
 </li>
 <li data-role="list-divider">Detalle</li>
 <li>
@@ -44,6 +103,16 @@
 	<%= servicio %>
 </p>
 <% end %>
-	</p>	
+	</p>
+</li>
+<li data-role="list-divider">Ubicación</li>	
+<li>
+	<p>
+  <div class="row" align="center">
+    <div class="span11">
+      <div id="map"></div>
+    </div>
+  </div>		
+	</p>
 </li>
 </ul>

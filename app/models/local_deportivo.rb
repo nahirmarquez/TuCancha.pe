@@ -1,5 +1,5 @@
 class LocalDeportivo < ActiveRecord::Base
-  attr_accessible :contacto, :descripcion, :direccion, :email, :nombre, :servicios, :telefono
+  attr_accessible :contacto, :descripcion, :direccion, :email, :nombre, :servicios, :telefono, :latitud, :longitud
   validates_uniqueness_of :nombre, :message => "ya se encuentra registrado"
   has_many :espacio_deportivos
 end

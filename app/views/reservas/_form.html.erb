@@ -1,0 +1,35 @@
+<%= form_for(@reserva) do |f| %>
+  <% if @reserva.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
+
+      <ul>
+      <% @reserva.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :espacio_deportivo_id %><br />
+    <%= f.text_field :espacio_deportivo_id, :maxlength=>'10', :style=>'width: 100px;', :value=>@espacio_deportivo.id %>
+  </div>  
+  
+  <div class="field">
+    <%= f.label :fecha %><br />
+    <%= f.date_select :fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :hora_inicio %><br />
+    <%= f.text_field :hora_inicio %>
+  </div>
+  <div class="field">
+    <%= f.label :hora_fin %><br />
+    <%= f.text_field :hora_fin %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+  </div>
+<% end %>

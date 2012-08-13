@@ -38,6 +38,14 @@
     <legend>E-mail</legend>
     <%= f.text_field :email %>
   </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Latitud</legend>
+    <%= f.text_field :latitud %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Longitud</legend>
+    <%= f.text_field :longitud %>
+  </fieldset>
   <div class="actions">
     <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
   </div>

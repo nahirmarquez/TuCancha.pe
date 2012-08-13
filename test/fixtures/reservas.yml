@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  espacio_deportivo_id: 1
+  fecha: 2012-08-12
+  hora_inicio: MyString
+  hora_fin: MyString
+  uid: MyString
+
+two:
+  espacio_deportivo_id: 1
+  fecha: 2012-08-12
+  hora_inicio: MyString
+  hora_fin: MyString
+  uid: MyString

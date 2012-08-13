@@ -10,6 +10,15 @@ class LocalDeportivosController < ApplicationController
       format.json { render json: @local_deportivos }
     end
   end
+  
+  def busqueda
+    @local_deportivos = LocalDeportivo.all
+
+    respond_to do |format|
+      format.html # busqueda.html.erb
+      format.json { render json: @local_deportivos }
+    end
+  end
 
   # GET /local_deportivos/1
   # GET /local_deportivos/1.json

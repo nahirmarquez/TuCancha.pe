@@ -3,7 +3,6 @@
   <h1>Información del Espacio Deportivo</h1>    
 	<%= link_to 'Editar', edit_espacio_deportivo_path(@espacio_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
 <% end %>
-    	
 <ul data-role="listview" data-inset="true">
 <li data-role="list-divider">Información</li>
 <li>
@@ -29,6 +28,11 @@
 <p>
   <b>Local deportivo:</b>
   <%= @espacio_deportivo.local_deportivo_id %>
+</p>
+<br />
+<p>
+  <b>Para realizar una reserva pulse aqui:</b>		    
+	<%= link_to "Reservar", new_reserva_path(:espacio_deportivo_id => @espacio_deportivo.id), 'data-role'=>'button', 'data-theme'=>'a' %>
 </p>
 </li>
 </ul>

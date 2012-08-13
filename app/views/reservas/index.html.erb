@@ -1,0 +1,31 @@
+<h1>Listing reservas</h1>
+
+<table>
+  <tr>
+    <th>Espacio deportivo</th>
+    <th>Fecha reserva</th>
+    <th>Hora inicio</th>
+    <th>Hora fin</th>
+    <th>Uid</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reservas.each do |reserva| %>
+  <tr>
+    <td><%= reserva.espacio_deportivo_id %></td>
+    <td><%= reserva.fecha %></td>
+    <td><%= reserva.hora_inicio %></td>
+    <td><%= reserva.hora_fin %></td>
+    <td><%= reserva.uid %></td>
+    <td><%= link_to 'Show', reserva %></td>
+    <td><%= link_to 'Edit', edit_reserva_path(reserva) %></td>
+    <td><%= link_to 'Destroy', reserva, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Reserva', new_reserva_path %>

@@ -6,15 +6,28 @@
 #map.connect ':controller/:action/:id.:format'
 
 
-SpikeSolution::Application.routes.draw do
-  resources :evento_deportivos
+SpikeSolution::Application.routes.draw do 
 
-  resources :espacio_deportivos
+  
+  resources :reservas
 
-  resources :local_deportivos
+#match '/auth/:provider/callback', to: 'sessions#create'
+match "/auth/:provider/callback" => "authentication#create"
 
-root :to => 'local_deportivos#index'
+match '/auth/failure', to: redirect('/')
 
+#match '/signout', to: 'sessions#destroy', as: 'signout'
+match "/signout" => "authentication#destroy", :as => :signout
+
+resources :evento_deportivos
+
+resources :espacio_deportivos
+
+resources :local_deportivos
+
+match "/busqueda" => "local_deportivos#busqueda", :as => :busqueda
+
+root :to => 'local_deportivos#home'
 
 # The priority is based upon order of creation:
 # first created -> highest priority.
