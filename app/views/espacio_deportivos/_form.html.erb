@@ -1,7 +1,7 @@
 <%= form_for(@espacio_deportivo) do |f| %>
   <% if @espacio_deportivo.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@espacio_deportivo.errors.count, "error") %> prohibited this espacio_deportivo from being saved:</h2>
+      <h2>Se encontraron <%=@espacio_deportivo.errors.count%> error(es) en validaciones:</h2>
 
       <ul>
       <% @espacio_deportivo.errors.full_messages.each do |msg| %>

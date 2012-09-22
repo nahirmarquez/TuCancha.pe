@@ -21,6 +21,17 @@ class EspacioDeportivosController < ApplicationController
       format.json { render json: @espacio_deportivo }
     end
   end
+  
+  
+  def findbylocal
+    @local_dep_ori = LocalDeportivo.find(params[:id])
+    @espacio_deportivos = @local_dep_ori.espacio_deportivos.find(:all)
+    respond_to do |format|
+      format.html # findbylocal.html.erb
+      format.json { render json: @espacio_deportivos }
+    end
+  end
+  
 
   # GET /espacio_deportivos/new
   # GET /espacio_deportivos/new.json

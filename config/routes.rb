@@ -9,7 +9,8 @@
 SpikeSolution::Application.routes.draw do 
 
   
-  resources :reservas
+resources :reservas
+match "/findbyfecha" => "reservas#findbyfecha", :as => :findbyfecha
 
 #match '/auth/:provider/callback', to: 'sessions#create'
 match "/auth/:provider/callback" => "authentication#create"
@@ -22,6 +23,7 @@ match "/signout" => "authentication#destroy", :as => :signout
 resources :evento_deportivos
 
 resources :espacio_deportivos
+match "/findbylocal" => "espacio_deportivos#findbylocal", :as => :findbylocal
 
 resources :local_deportivos
 

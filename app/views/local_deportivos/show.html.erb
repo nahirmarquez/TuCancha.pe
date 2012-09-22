@@ -3,8 +3,12 @@
   <h1>Información del local Deportivo</h1>    
 	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
 <% end %>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
 
 <script type="text/javascript">
+    
+    document.getElementById("idJQueryNew").disabled = true;
+
 	var map;
     $(document).ready(function(){
     map = new GMaps({
@@ -58,6 +62,7 @@
         }
       });
     });
+    document.getElementById("idJQueryNew").disabled = false;
 </script>
   
 <ul data-role="listview" data-inset="true">
@@ -84,7 +89,7 @@
 	  <%= @local_deportivo.email %>
 	</p>
 	<p align="right">
-		<a href="../espacio_deportivos">Listado de Espacios Deportivos</a>
+		<%= link_to 'Listado de espacios deportivos', :controller => "espacio_deportivos", :action => "findbylocal", :id => @local_deportivo.id %>
 	</p>
 </li>
 <li data-role="list-divider">Detalle</li>
@@ -106,9 +111,11 @@
 	</p>
 </li>
 <li data-role="list-divider">Ubicación</li>	
+
 <li>
 	<p>
   <div class="row" align="center">
+
     <div class="span11">
       <div id="map"></div>
     </div>

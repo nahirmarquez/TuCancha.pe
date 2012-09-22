@@ -1,7 +1,7 @@
 <%= form_for(@reserva) do |f| %>
   <% if @reserva.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@reserva.errors.count, "error") %> prohibited this reserva from being saved:</h2>
+      <h2>Se encontraron <%=@reserva.errors.count%> error(es) en validaciones</h2>
 
       <ul>
       <% @reserva.errors.full_messages.each do |msg| %>
@@ -14,6 +14,7 @@
   <div class="field">
     <%= f.label :espacio_deportivo_id %><br />
     <%= f.text_field :espacio_deportivo_id, :maxlength=>'10', :style=>'width: 100px;', :value=>@espacio_deportivo.id %>
+    <%= link_to 'Ver reservas', :controller => "reservas", :action => "findbyfecha", :id => @espacio_deportivo.id %>
   </div>  
   
   <div class="field">

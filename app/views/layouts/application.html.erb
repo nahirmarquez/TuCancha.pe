@@ -8,13 +8,16 @@
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />  
+   
   	<link rel="stylesheet" type="text/css" href="https://raw.github.com/HPNeo/gmaps/master/examples/examples.css" />
   	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	<script type="text/javascript" src="https://raw.github.com/HPNeo/gmaps/master/gmaps.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    
+    <link rel="stylesheet" id= "idJQueryNew" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />  
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
+    
     <style type="text/css">
 		.ui-body-f {
 			background-color: #f9f9f9;
@@ -108,7 +111,9 @@
 		    <!--<%= link_to "Cerrar Sesión", signout_path, id: "sign_out" %>-->
 		    <%= link_to "Cerrar Sesión", signout_path, 'data-role'=> 'button', 'data-icon'=>'facebook', 'class'=>'ui-btn-right' %>
 		  <% else %>
-		    <%= link_to "Ingresar por Facebook", "/auth/facebook", 'data-role'=>'button', 'data-icon'=>'facebook', 'class'=>'ui-btn-right', :rel => 'external' %>
+		  
+		  
+		    <%= link_to "Ingresar por Facebook", "https://graph.facebook.com/oauth/authorize?response_type=code&client_id=281141371992155&redirect_uri=http://proj001.herokuapp.com/auth/facebook/callback&state=da9a392d098d711759a752e80529ca62cc3a855376fe5bca&scope=publish_stream%2Cemail", 'data-role'=>'button', 'data-icon'=>'facebook', 'class'=>'ui-btn-right', :rel => 'external' %>
 		  <% end %>
 		</div>
 

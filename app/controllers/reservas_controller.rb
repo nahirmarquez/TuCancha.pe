@@ -29,7 +29,6 @@ class ReservasController < ApplicationController
     @reserva = Reserva.new
     @espacio_deportivo = EspacioDeportivo.find(params[:espacio_deportivo_id])
     @reserva.espacio_deportivo_id = @espacio_deportivo.id 
-    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reserva }
@@ -45,14 +44,17 @@ class ReservasController < ApplicationController
   # POST /reservas.json
   def create
     @reserva = Reserva.new(params[:reserva])
+    @reserva.espacio_deportivo_id = params[:reserva][:espacio_deportivo_id]
+    @espacio_deportivo = EspacioDeportivo.find(params[:reserva][:espacio_deportivo_id])
 
     respond_to do |format|
       if @reserva.save
+        logger.info(@reserva.errors.any?);
         format.html { redirect_to @reserva, notice: 'Reserva fue realizada correctamente.' }
         format.json { render json: @reserva, status: :created, location: @reserva }
       else
         format.html { render action: "new" }
-        format.json { render json: @reserva.errors, status: :unprocessable_entity }
+        format.json { render json: @reserva }
       end
     end
   end
@@ -84,4 +86,15 @@ class ReservasController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def findbyfecha    
+    @reservas = Reserva.where(:espacio_deportivo_id =>params[:id])
+    @espacio_deportivo_id = params[:id]
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @reservas }
+    end
+    
+  end
+  
 end
