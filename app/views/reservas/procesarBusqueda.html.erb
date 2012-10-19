@@ -1,0 +1,31 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Regresar', :controller => "reservas", :action => "buscar", :espacio_deportivo_id => @espacio_deportivo_id %>  
+ 
+<% end %>
+
+<% if @espacio_deportivos!= nil%>
+<ul data-role="listview"  data-inset="true">
+<li data-role="list-divider">Listado de Canchas Encontradas</li>
+<% @espacio_deportivos.each do |espacio_deportivo| %>
+    <li>
+        <%= image_tag("futbol.jpg", :height => '100', :width => '100') %>  
+	    <p><b>Local Deportivo:</b> <%= espacio_deportivo.local_deportivo.nombre %></p>	    
+	    <p><b>Direccion:</b> <%= espacio_deportivo.local_deportivo.direccion %></p>
+	    <p><b>Espacio Deportivo:</b> <%= espacio_deportivo.nombre %></p>	    
+	    <p><b>Descripcion:</b> <%= espacio_deportivo.descripcion %></p>
+	    <p><b>Capacidad:</b> <%= espacio_deportivo.capacidad %></p>
+	    <p><b>Costo:</b> <%= espacio_deportivo.costo %></p>
+	   
+	    <% if usuario_logueado%>
+	    <p><%= link_to "Reservar", new_reserva_path(:espacio_deportivo_id => espacio_deportivo.id, 
+	    											:fecha => @fecha,
+	                                                :horaInicio => @horaInicio,
+	                                                :horaFin=>@horaFin), 'data-theme'=>'a' %></p>
+	    <%end%>	    
+	</li>
+
+<% end %>
+</ul>
+<%end%>

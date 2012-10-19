@@ -3,7 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>TuCancha.pe</title> 
-    
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -17,6 +16,10 @@
     
     <link rel="stylesheet" id= "idJQueryNew" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />  
     <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
+    
+    <script>
+    $.mobile.ajaxEnabled = false;
+    </script>
     
     <style type="text/css">
 		.ui-body-f {
@@ -105,16 +108,20 @@
 		<p align="center">
 			<%= image_tag("logo.png") %>
 		</p>       	 	
-	  	<div id="user_nav" align="right">
+	  	
+	  	<div id="user_nav" align="right" class="ui-btn-right">
 		  <% if current_user %>
-		    Signed in as <strong><%= current_user.name %></strong>!
-		    <!--<%= link_to "Cerrar Sesión", signout_path, id: "sign_out" %>-->
-		    <%= link_to "Cerrar Sesión", signout_path, 'data-role'=> 'button', 'data-icon'=>'facebook', 'class'=>'ui-btn-right' %>
+		    Bienvenido,  <strong><%= current_user.name %></strong>!!   
+		    <%= link_to "Cerrar Sesión", signout_path, 'data-role'=> 'button', 'data-icon'=>'facebook' %>
 		  <% else %>
-		  
-		  
-		    <%= link_to "Ingresar por Facebook", "https://graph.facebook.com/oauth/authorize?response_type=code&client_id=281141371992155&redirect_uri=http://proj001.herokuapp.com/auth/facebook/callback&state=da9a392d098d711759a752e80529ca62cc3a855376fe5bca&scope=publish_stream%2Cemail", 'data-role'=>'button', 'data-icon'=>'facebook', 'class'=>'ui-btn-right', :rel => 'external' %>
+		      <% if usuario_logueado %>
+		          Bienvenido,  <strong><%= usuario_logueado.nombre %> <%= usuario_logueado.apellido %></strong>!!!	 	
+		          <%= link_to "Cerrar Sesión", salir_path, 'data-role'=> 'button', 'data-icon'=>'facebook' %>          
+		      <% else %>
+		        <%= link_to "Ingresar a la Aplicacion", "/login", 'data-role'=>'button', 'data-icon'=>'facebook', :rel => 'external' %>	
+		      <% end %>
 		  <% end %>
+ 
 		</div>
 
       <%= yield :header %>

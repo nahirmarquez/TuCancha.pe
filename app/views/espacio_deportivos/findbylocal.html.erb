@@ -1,7 +1,12 @@
 <%= content_for :header do %>
   <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
   <h1>Locales Deportivos</h1>
-  <%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
+  
+            <% if usuario_logueado %>
+        	<%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>
+       <% end %>
+  
+    
 <% end %>
       
 <ul data-role="listview" data-inset="true">
@@ -15,7 +20,17 @@
     <p>Descripción: <%= espacio_deportivo.descripcion %></p>
     <p>Local Deportivo: <%= espacio_deportivo.local_deportivo_id %></p>
     </a>
-    <p><%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %></p>    
+    <p>
+    	
+    <% if usuario_logueado %>
+       <%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %>
+    <% end %>
+    	
+    </p> 
+    
+
+    
+       
   </li>
 
 <% end %>

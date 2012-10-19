@@ -15,7 +15,13 @@
     <p>Descripción: <%= espacio_deportivo.descripcion %></p>
     <p>Local Deportivo: <%= espacio_deportivo.local_deportivo_id %></p>
     </a>
-    <p><%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %></p>    
+    <p>
+    	
+    <% if usuario_logueado %>
+       	<%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %>
+    <% end %>
+
+    </p>    
   </li>
 
 <% end %>

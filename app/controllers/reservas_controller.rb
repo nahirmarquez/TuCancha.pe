@@ -29,6 +29,21 @@ class ReservasController < ApplicationController
     @reserva = Reserva.new
     @espacio_deportivo = EspacioDeportivo.find(params[:espacio_deportivo_id])
     @reserva.espacio_deportivo_id = @espacio_deportivo.id 
+    
+    @listaReservas = Reserva.where("espacio_deportivo_id =?",params[:espacio_deportivo_id])
+    
+    @fecha = params[:fecha]
+    @horaInicio = params[:horaInicio]
+    @horaFin = params[:horaFin]
+    
+    
+    if @fecha!=nil && @horaInicio!=nil && @horaFin!= nil
+      @reserva.fecha = @fecha
+      @reserva.hora_inicio = @horaInicio
+      @reserva.hora_fin = @horaFin
+    end
+    
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reserva }
@@ -44,8 +59,13 @@ class ReservasController < ApplicationController
   # POST /reservas.json
   def create
     @reserva = Reserva.new(params[:reserva])
+
     @reserva.espacio_deportivo_id = params[:reserva][:espacio_deportivo_id]
-    @espacio_deportivo = EspacioDeportivo.find(params[:reserva][:espacio_deportivo_id])
+    @espacio_deportivo = EspacioDeportivo.find(params[:reserva][:espacio_deportivo_id]) 
+        
+    if usuario_logueado
+      @reserva.usuario_id = usuario_logueado.id
+    end
 
     respond_to do |format|
       if @reserva.save
@@ -94,6 +114,32 @@ class ReservasController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @reservas }
     end
+    
+  end
+  
+  def ver_mis_reservas
+    @reservas = usuario_logueado.reservas;
+  end
+  
+  def buscar
+    
+  end
+  
+  def procesarBusqueda
+    @fecha = params[:fecha]
+    @horaInicio = params[:horaInicio]
+    @horaFin = params[:horaFin]
+    
+    logger.info(@fecha+@horaInicio+@horaFin)
+      
+
+    @espacio_deportivos = EspacioDeportivo.where("id NOT IN (SELECT a.espacio_deportivo_id FROM reservas a 
+                                       where a.fecha = ? 
+                                       and a.hora_inicio = ? and a.hora_fin= ?) ",
+                                       @fecha,@horaInicio,@horaFin)
+  end
+  
+  def verCalendarioReservas
     
   end
   

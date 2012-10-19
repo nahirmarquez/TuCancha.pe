@@ -1,0 +1,78 @@
+
+<%= content_for :header do %>
+  <%= link_to 'Regresar', "/verSolicitudes" %>
+  <h1>Locales Deportivos</h1>
+         <% if usuario_logueado %>
+        	<%= link_to 'Nuevo Local Deportivo', new_local_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>
+       <% end %>
+   
+<% end %>
+
+
+<ul data-role="listview" data-inset="true">
+<li data-role="list-divider">Edición de Local Deportivo</li>
+<li>
+
+<%= form_for @local_deportivo,:url =>  "/confirmarSolicitud?id="+@local_deportivo.id.to_s   do |f| %>
+  <% if @local_deportivo.errors.any? %>
+    <div id="error_explanation">
+      <h2>Se encontraron <%=@local_deportivo.errors.count%> error(es) en validaciones:</h2>
+
+      <ul>
+      <% @local_deportivo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>  
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Nombre</legend>
+    <%= f.text_field :nombre %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Dirección</legend>
+    <%= f.text_field :direccion %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Descripción</legend>
+    <%= f.text_area :descripcion %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Servicios</legend>
+    <%= f.text_area :servicios %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Contacto</legend>
+    <%= f.text_field :contacto %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Telefono</legend>
+    <%= f.text_field :telefono %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>E-mail</legend>
+    <%= f.text_field :email %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Latitud</legend>
+    <%= f.text_field :latitud %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Longitud</legend>
+    <%= f.text_field :longitud %>
+  </fieldset>
+  
+  
+  <div class="actions">
+    <%= f.submit 'Aceptar', 'data-icon'=>'check', 'data-theme'=>'b', :name => 'aceptar'%>
+    <%= f.submit 'Rechazar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+    
+  </div>
+
+<% end %>
+
+</li>
+</ul>
+    
+
+

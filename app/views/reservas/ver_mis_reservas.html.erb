@@ -1,0 +1,24 @@
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Regresar', :controller => "reservas", :action => "new", :espacio_deportivo_id => @espacio_deportivo_id %>  
+ 
+<% end %>
+      
+<ul data-role="listview"  data-inset="true">
+<li data-role="list-divider">Listado de Reservas Encontradas</li>
+<% @reservas.each do |reserva| %>
+    <li>
+        <%= image_tag("futbol.jpg", :height => '100', :width => '100') %>  
+	    <p><b>Local Deportivo:</b> <%= reserva.espacio_deportivo.local_deportivo.nombre %></p>	    
+	    <p><b>Espacio Deportivo:</b> <%= reserva.espacio_deportivo.nombre %></p>	    
+	    <p><b>Fecha de Reserva:</b> <%= reserva.fecha %></p>	    
+	    <p><b>Hora de Inicio:</b> <%= reserva.hora_inicio %> hrs</p>
+	    <p><b>Hora de Fin:</b> <%= reserva.hora_fin %> hrs</p>
+	</li>
+  
+<% end %>
+
+
+
+</ul>

@@ -1,14 +1,19 @@
 <%= content_for :header do %>
     <%= link_to 'Locales Deportivos', local_deportivos_path, 'data-icon'=> 'back'  %>
   <h1>Información del local Deportivo</h1>    
-	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
+  	  <% if usuario_logueado && usuario_logueado.rol == "3"%>
+       	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
+    <% end %>
+    
+  
 <% end %>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a2/jquery.mobile-1.0a2.min.css" />
 
 <script type="text/javascript">
-    
-    document.getElementById("idJQueryNew").disabled = true;
 
+window.onload = function funcion1()
+{
+	
 	var map;
     $(document).ready(function(){
     map = new GMaps({
@@ -63,12 +68,19 @@
       });
     });
     document.getElementById("idJQueryNew").disabled = false;
+    //$.mobile.ajaxFormsEnabled = false;
+}
 </script>
   
 <ul data-role="listview" data-inset="true">
 <li data-role="list-divider">Información</li>
 <li>
-	  <%= image_tag("futbol.jpg", :height => '200', :width => '200') %>
+
+<% if @local_deportivo.imagen_ld.exists? then %>
+	<%= image_tag @local_deportivo.imagen_ld.url, :height => '200', :width => '200' %>
+<% else %>
+    <%= image_tag("futbol.jpg", :height => '200', :width => '200') %>
+<% end %>
 	  <h1>
 	  	<%= @local_deportivo.nombre %>
 	  </h1>	  	
@@ -89,7 +101,9 @@
 	  <%= @local_deportivo.email %>
 	</p>
 	<p align="right">
+		 <% if usuario_logueado && usuario_logueado.rol == "3"%>
 		<%= link_to 'Listado de espacios deportivos', :controller => "espacio_deportivos", :action => "findbylocal", :id => @local_deportivo.id %>
+		 <% end %>
 	</p>
 </li>
 <li data-role="list-divider">Detalle</li>
@@ -110,6 +124,30 @@
 <% end %>
 	</p>
 </li>
+<li data-role="list-divider">Listado de Espacios Deportivos</li>
+<% @espacio_deportivos.each do |espacio_deportivo| %>
+  <li>
+    <h3><%= espacio_deportivo.nombre %></h3>
+    <p>Costo: <%= espacio_deportivo.costo %></p>
+    <p>Capacidad: <%= espacio_deportivo.capacidad %></p>
+    <p>Descripción: <%= espacio_deportivo.descripcion %></p>
+    <p>Local Deportivo: <%= espacio_deportivo.local_deportivo_id %></p>
+     <p>
+     <% if current_user || usuario_logueado %>
+    <%= link_to "Reservar", new_reserva_path(:espacio_deportivo_id => espacio_deportivo.id), 'data-theme'=>'a' %>
+    <% end %>
+    </p>
+    </a>
+    <p>
+    	
+     <% if usuario_logueado && usuario_logueado.rol == "3"%>
+       <%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %>
+    <% end %>
+    	
+    </p> 
+        <% end %>   
+  </li>
+
 <li data-role="list-divider">Ubicación</li>	
 
 <li>
@@ -119,6 +157,7 @@
     <div class="span11">
       <div id="map"></div>
     </div>
+
   </div>		
 	</p>
 </li>

@@ -1,8 +1,11 @@
 <%= content_for :header do %>
   <%= link_to 'Regresar', espacio_deportivos_path %>
   <h1>Locales Deportivos</h1>
-  <%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>  
-
+  
+            <% if usuario_logueado %>
+        	<%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %> 
+       <% end %>
+  
 <% end %>
 
 <ul data-role="listview" data-inset="true">

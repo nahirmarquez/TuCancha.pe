@@ -8,11 +8,24 @@
 <% @local_deportivos.each do |local_deportivo| %>
     <li>
     	<a href='<%= local_deportivo_path(local_deportivo) %>'>    	
-    	<%= image_tag("futbol.jpg", :height => '100', :width => '100') %>    	
+    	
+    	<% if local_deportivo.imagen_ld.exists? then %>
+	    <%= image_tag local_deportivo.imagen_ld.url, :height => '200', :width => '200' %>
+        <% else %>
+        <%= image_tag("futbol.jpg", :height => '200', :width => '200') %>
+        <% end %>
+    	
     	<h3><%= local_deportivo.nombre %></h3>
 	    <p>Dirección: <%= local_deportivo.direccion %></p>	    
 	    <p>Telefono: <%= local_deportivo.telefono %></p>
 	    <p>Email: <%= local_deportivo.email %></p>
+	    <p>
+	    <% if usuario_logueado && usuario_logueado.rol == "3"%>
+        	<%= link_to 'Editar', edit_local_deportivo_path(local_deportivo)%>
+       <% end %>
+       </p>
+	    	    	
+	    
 	    </a>
 	</li>
   

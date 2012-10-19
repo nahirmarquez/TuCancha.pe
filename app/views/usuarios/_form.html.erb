@@ -1,0 +1,61 @@
+<%= form_for @usuario do |f| %>
+  <% if @usuario.errors.any? %>
+    <div id="error_explanation">
+      <h2>Se encontraron <%=@usuario.errors.count%> error(es) en validaciones:</h2>
+
+      <ul>
+      <% @usuario.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>  
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>E-Mail</legend>
+    <%= f.text_field :email %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Password </legend>
+    <%= f.password_field :password %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Confirmar Password</legend>
+    <%= f.password_field :password_confirmation %>
+  </fieldset>
+   
+   <% if usuario_logueado && usuario_logueado.rol == "3"%>
+
+      <fieldset data-role="controlgroup" data-type="horizontal">
+        <legend>Rol Asignado</legend>
+        <select name="usuario[rol]">
+         <option value= "1">Usuario</option>
+         <option value = "2">Administrador de Local</option>
+         <option value = "3">Administrador de Portal</option>
+       </select>     
+     </fieldset>
+   <% end %>
+   
+   
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Nombre</legend>
+    <%= f.text_field :nombre %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Apellido</legend>
+    <%= f.text_field :apellido %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Telefono</legend>
+    <%= f.text_field :telefono %>
+  </fieldset>
+    <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Edad</legend>
+    <%= f.text_field :edad %>
+  </fieldset>   
+  
+  <div class="actions">
+    <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+  </div>
+
+<% end %>
+

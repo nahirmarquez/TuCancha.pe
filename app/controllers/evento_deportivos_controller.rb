@@ -1,7 +1,7 @@
 
 class EventoDeportivosController < ApplicationController
   # GET /evento_deportivos
-  # GET /evento_deportivos.json
+  # GET /evento_deportivos.json 
   def index
     @evento_deportivos = EventoDeportivo.all
 

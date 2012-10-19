@@ -1,0 +1,87 @@
+<script>
+
+function enviarDatosForm(){
+	alert("a");
+horaInicio = document.getElementById("horaInicio").value
+	alert("a");
+horaFin = document.getElementById("horaFin").value
+	alert("a");
+	
+	alert(horaInicio)
+	alert("b")
+if(horaInicio ==null || horaInicio< 0 || horaInicio > 23  ){
+	alert("Por favor Ingrese un valor entre 0 y 23 para la hora de inicio");
+	return;
+}
+
+if(horaFin == null || horaFin< 0 || horaFin > 23){
+	
+	alert("Por favor Ingrese un valor entre 0 y 23 para la hora de fin");
+	return;
+}
+
+if(horaInicio>horaFin){
+	alert("La hora de Inicio debeser menor a la Hora de Fin");
+	return;
+}
+document.forms[0].submit
+	
+}
+
+</script>
+
+
+<%= content_for :header do %>
+  <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
+  <h1>Locales Deportivos</h1>
+  <%= link_to 'Regresar', :controller => "reservas", :action => "new", :espacio_deportivo_id => @espacio_deportivo_id %>  
+ 
+<% end %>
+
+
+<form accept-charset="UTF-8" action="/procesarBusqueda" method="post">
+<ul data-role="listview"  data-inset="true">
+<li data-role="list-divider">Filtros de Busqueda</li>
+<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+<li>
+	<fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
+  	<div role="heading" class="ui-controlgroup-label">Fecha </div><div class="ui-controlgroup-controls">    
+    <input id="fecha" name="fecha" type="date" data-options="{&quot;mode&quot;: &quot;calbox&quot;, &quot;dateFormat&quot;:&quot;YYYY-mm-dd&quot;}" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+  </div>
+  </fieldset>
+</li>
+
+<li>
+	<fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
+  	<div role="heading" class="ui-controlgroup-label">Hora Inicio</div><div class="ui-controlgroup-controls">    
+    <input id="horaInicio" name="horaInicio" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+    </div>
+    </fieldset>
+</li>
+
+<li>
+	<fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
+  	<div role="heading" class="ui-controlgroup-label">Hora Fin</div><div class="ui-controlgroup-controls">    
+    <input id="horaFin" name="horaFin" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+    </div>
+    </fieldset>
+</li>
+
+</ul>
+
+ 
+ <br>
+  <div class="actions">
+    	<span class="ui-btn-inner ui-btn-corner-all">
+    		<input data-icon="check" data-theme="b" name="commit" type="submit"  value="Buscar" class="ui-btn-hidden" aria-disabled="false">
+  </div>
+  
+</form>
+
+
+
+
+
+
+
+</ul>

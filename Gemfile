@@ -1,8 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.5'
+#gem 'activesupport', '3.2.6'
+gem 'rails', '3.2.2'
+
+gem 'thin'
+gem 'paperclip'
 
 gem 'omniauth-facebook'
+
+gem 'bcrypt-ruby'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

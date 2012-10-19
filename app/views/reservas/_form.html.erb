@@ -1,3 +1,53 @@
+<script>
+
+   function getEventData() {
+
+      return {
+         events : [
+            <% if @listaReservas !=nil %>
+              <% @listaReservas.each do |reserva| %>
+               <% if reserva.fecha != nil && reserva.hora_inicio !=nil && reserva.hora_fin != nil%>
+            {
+
+               "id":<%= reserva.id %>,
+               "start": new Date(<%= reserva.fecha.strftime("%Y")%>, 
+                                 <%= reserva.fecha.strftime("%m").to_i-1%>, 
+                                 <%= reserva.fecha.strftime("%d")%>, 
+                                 <%= reserva.hora_inicio%>),
+               "end": new Date(<%= reserva.fecha.strftime("%Y")%>, 
+                                 <%= reserva.fecha.strftime("%m").to_i-1%>, 
+                                 <%= reserva.fecha.strftime("%d")%>, 
+                                 <%= reserva.hora_fin%>),
+               
+               "title":"Hora Reservada",
+               readOnly : true
+            },
+                <% end %>
+			  <% end %>    
+			<% end%>
+			{
+               "id":6,
+               "start": new Date(2012, 1, 1, 8),
+               "end": new Date(2012, 1, 1, 10),
+               "title":"DEMO",
+               readOnly : true
+            }
+         ]
+      };
+   }
+
+
+function abrirCalendario(){
+	window.open('/calendario.html', 'Calendario', 'width=800,height=600')
+}
+
+function GetValueFromChild(id, text)
+{
+  document.getElementById(id).value = text;
+}
+
+</script>
+
 <%= form_for(@reserva) do |f| %>
   <% if @reserva.errors.any? %>
     <div id="error_explanation">
@@ -14,13 +64,21 @@
   <div class="field">
     <%= f.label :espacio_deportivo_id %><br />
     <%= f.text_field :espacio_deportivo_id, :maxlength=>'10', :style=>'width: 100px;', :value=>@espacio_deportivo.id %>
-    <%= link_to 'Ver reservas', :controller => "reservas", :action => "findbyfecha", :id => @espacio_deportivo.id %>
+    <a href="javascript:abrirCalendario()"> Ver Disponibilidad </a>
   </div>  
   
   <div class="field">
-    <%= f.label :fecha %><br />
-    <%= f.date_select :fecha %>
+  	<%= f.label :fecha %><br />
+   <input name="reserva[fecha]" id="fecha" type="date" 
+   <% if @fecha!=nil %>
+     value="<%=@fecha%>"
+   <%end%>
+   data-options='{"mode": "calbox", "dateFormat":"YYYY-mm-dd"}'
+   class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c" >
   </div>
+  
+  
+  
   <div class="field">
     <%= f.label :hora_inicio %><br />
     <%= f.text_field :hora_inicio %>
@@ -29,7 +87,8 @@
     <%= f.label :hora_fin %><br />
     <%= f.text_field :hora_fin %>
   </div>
-  
+
+ 
   <div class="actions">
     <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
   </div>

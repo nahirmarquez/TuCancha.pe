@@ -1,4 +1,5 @@
-<%= form_for(@local_deportivo) do |f| %>
+
+<%= form_for @local_deportivo, :html => { :multipart => true } do |f| %>
   <% if @local_deportivo.errors.any? %>
     <div id="error_explanation">
       <h2>Se encontraron <%=@local_deportivo.errors.count%> error(es) en validaciones:</h2>
@@ -9,7 +10,7 @@
       <% end %>
       </ul>
     </div>
-  <% end %>
+  <% end %>  
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>Nombre</legend>
     <%= f.text_field :nombre %>
@@ -46,7 +47,15 @@
     <legend>Longitud</legend>
     <%= f.text_field :longitud %>
   </fieldset>
+  
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Imagen</legend>
+    <%= f.file_field :imagen_ld %>
+  </fieldset>
+  
   <div class="actions">
     <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
   </div>
+
 <% end %>
+

@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:usuario_id] = nil ##Sale de la app tambien
     redirect_to root_url
   end
 end

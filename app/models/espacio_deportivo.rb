@@ -5,4 +5,5 @@ class EspacioDeportivo < ActiveRecord::Base
   validates_numericality_of :capacidad , :message => ": La capacidad debe ser un valor numerico"
   validates_numericality_of :costo , :message => ": El costo del alquiler debe ser numerico" 
   belongs_to :local_deportivo
+  has_many :reservas
 end

@@ -1,0 +1,25 @@
+<%= form_tag "/sesiones"  do %>
+ 
+   <% flash.each do |key, value| %>
+        <div id="error_explanation" class="alert alert-<%= key %>"><%= value %></div>
+    <% end %>
+ 
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>E-Mail</legend>
+    <%= text_field_tag :email, params[:email] %>
+  </fieldset>
+  <fieldset data-role="controlgroup" data-type="horizontal">
+    <legend>Password </legend>
+    <%= password_field_tag :password %>
+  </fieldset>
+ 
+   <%= link_to "Ingresar por Facebook", "/auth/facebook" %><br><br>
+   <%= link_to "Nuevo usuario", "usuarios/new" %>
+ <br>
+ <br>
+  <div class="actions">
+    <%= submit_tag 'Aceptar' , 'data-icon'=>'check', 'data-theme'=>'b' %>
+  </div>
+  
+<% end %>
+

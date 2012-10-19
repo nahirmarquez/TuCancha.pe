@@ -11,6 +11,13 @@ SpikeSolution::Application.routes.draw do
   
 resources :reservas
 match "/findbyfecha" => "reservas#findbyfecha", :as => :findbyfecha
+match "/verMisReservas" => "reservas#ver_mis_reservas", :as => :vermisreservas
+match "/buscarDisponibilidad" => "reservas#buscar",:as => :buscarDisponibilidad
+match "/procesarBusqueda" => "reservas#procesarBusqueda",:as => :procesarBusqueda
+match "/verCalendarioReservas" =>"reservas#verCalendarioReservas",:as => :verCalendarioReservas
+
+match "/login" => "sesiones#new", :as => "login"
+match "/sesiones" => "sesiones#create", :as => "sesion"
 
 #match '/auth/:provider/callback', to: 'sessions#create'
 match "/auth/:provider/callback" => "authentication#create"
@@ -20,16 +27,27 @@ match '/auth/failure', to: redirect('/')
 #match '/signout', to: 'sessions#destroy', as: 'signout'
 match "/signout" => "authentication#destroy", :as => :signout
 
+match "/salir" => "sesiones#destroy", :as => :salir
+
+
 resources :evento_deportivos
 
 resources :espacio_deportivos
 match "/findbylocal" => "espacio_deportivos#findbylocal", :as => :findbylocal
 
 resources :local_deportivos
+match "/verSolicitudes" => "local_deportivos#ver_solicitudes", :as => :versolicitudes
+match "/editarSolicitud" => "local_deportivos#editar_solicitud", :as => :editarsolicitud
+match "/confirmarSolicitud" => "local_deportivos#confirmar_solicitud", :as => :confirmarsolicitud
+match "/rechazarSolicitud" => "local_deportivos#rechazar_solicitud", :as => :rechazarsolicitud
+match "/verMisLocales" => "local_deportivos#ver_mis_locales", :as => :vermislocales
 
 match "/busqueda" => "local_deportivos#busqueda", :as => :busqueda
 
 root :to => 'local_deportivos#home'
+
+resources :usuarios
+
 
 # The priority is based upon order of creation:
 # first created -> highest priority.
