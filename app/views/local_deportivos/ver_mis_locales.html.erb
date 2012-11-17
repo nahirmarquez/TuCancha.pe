@@ -8,7 +8,7 @@
 <li data-role="list-divider">Listado de Locales Deportivos</li>
 <% @local_deportivos.each do |local_deportivo| %>
     <li>
-    	<a href='<%= local_deportivo_path(local_deportivo) %>'>    	
+    	<a href='/verMiLocal?id=<%=local_deportivo.id%>'> 
     	 <% if local_deportivo.imagen_ld.exists? then %>
     	 <%= image_tag local_deportivo.imagen_ld.url, :height => '100', :width => '100' %>
     	<% else %>

@@ -3,9 +3,8 @@
   <h1>Locales Deportivos</h1>
   
             <% if usuario_logueado %>
-        	<%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path, 'data-role'=>'button', 'data-icon'=>'gear' %>
+        	<%= link_to 'Nuevo Espacio Deportivo', new_espacio_deportivo_path(:local_id => @local_dep_ori.id), 'data-role'=>'button', 'data-icon'=>'gear' %>
        <% end %>
-  
     
 <% end %>
       

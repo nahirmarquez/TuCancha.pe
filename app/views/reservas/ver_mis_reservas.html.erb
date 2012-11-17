@@ -9,12 +9,16 @@
 <li data-role="list-divider">Listado de Reservas Encontradas</li>
 <% @reservas.each do |reserva| %>
     <li>
-        <%= image_tag("futbol.jpg", :height => '100', :width => '100') %>  
+    	
+        <%= image_tag("futbol.jpg", :height => '146', :width => '120', :style=> 'max-width:none; max-height:none; min-width:100px') %>  
+	    <fieldset data-role="controlgroup" data-type="horizontal" style="padding-left:45px;">	    
 	    <p><b>Local Deportivo:</b> <%= reserva.espacio_deportivo.local_deportivo.nombre %></p>	    
 	    <p><b>Espacio Deportivo:</b> <%= reserva.espacio_deportivo.nombre %></p>	    
 	    <p><b>Fecha de Reserva:</b> <%= reserva.fecha %></p>	    
 	    <p><b>Hora de Inicio:</b> <%= reserva.hora_inicio %> hrs</p>
-	    <p><b>Hora de Fin:</b> <%= reserva.hora_fin %> hrs</p>
+	    <p><b>Hora de Fin:</b> <%= reserva.hora_fin %> hrs</p>	    
+	    <p><%= link_to 'Eliminar', reserva, method: :delete %></p>	
+	    </fieldset>
 	</li>
   
 <% end %>

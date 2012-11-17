@@ -1,0 +1,22 @@
+en:
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: must be accepted
+      blank: no puede ser un valor en blanco
+      confirmation: y el valor ingresado para confirmacion no coinciden
+      
+  activerecord:
+    attributes:
+      usuario:
+        password_digest: "Confirmacion de Password"
+        
+    
+      
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors

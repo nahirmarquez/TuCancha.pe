@@ -26,28 +26,40 @@ class ReservasController < ApplicationController
   # GET /reservas/new
   # GET /reservas/new.json
   def new
-    @reserva = Reserva.new
-    @espacio_deportivo = EspacioDeportivo.find(params[:espacio_deportivo_id])
-    @reserva.espacio_deportivo_id = @espacio_deportivo.id 
     
-    @listaReservas = Reserva.where("espacio_deportivo_id =?",params[:espacio_deportivo_id])
+    if current_user || usuario_logueado    
+      @reserva = Reserva.new
+      @espacio_deportivo = EspacioDeportivo.find(params[:espacio_deportivo_id])
+      @reserva.espacio_deportivo_id = @espacio_deportivo.id 
     
-    @fecha = params[:fecha]
-    @horaInicio = params[:horaInicio]
-    @horaFin = params[:horaFin]
+      @local_deportivo = LocalDeportivo.find(@espacio_deportivo.local_deportivo_id)
     
     
-    if @fecha!=nil && @horaInicio!=nil && @horaFin!= nil
-      @reserva.fecha = @fecha
-      @reserva.hora_inicio = @horaInicio
-      @reserva.hora_fin = @horaFin
-    end
+      
+    
+      @fecha = params[:fecha]
+      @horaInicio = params[:horaInicio]
+      @horaFin = params[:horaFin]
     
     
+      if @fecha!=nil && @horaInicio!=nil && @horaFin!= nil 
+        @reserva.fecha = @fecha
+        @reserva.hora_inicio = @horaInicio
+        @reserva.hora_fin = @horaFin
+      end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @reserva }
     end
+    else
+      session[:return_to] = new_reserva_path(:espacio_deportivo_id => params[:espacio_deportivo_id], 
+                                             :fecha => params[:fecha],
+                                              :horaInicio => params[:horaInicio],
+                                              :horaFin=>params[:horaFin])
+      redirect_to "/login"
+    end
+    
+ 
   end
 
   # GET /reservas/1/edit
@@ -62,6 +74,7 @@ class ReservasController < ApplicationController
 
     @reserva.espacio_deportivo_id = params[:reserva][:espacio_deportivo_id]
     @espacio_deportivo = EspacioDeportivo.find(params[:reserva][:espacio_deportivo_id]) 
+    @local_deportivo = LocalDeportivo.find(@espacio_deportivo.local_deportivo_id)
         
     if usuario_logueado
       @reserva.usuario_id = usuario_logueado.id
@@ -83,6 +96,7 @@ class ReservasController < ApplicationController
   # PUT /reservas/1.json
   def update
     @reserva = Reserva.find(params[:id])
+    @local_deportivo = LocalDeportivo.find(@espacio_deportivo.local_deportivo_id)
 
     respond_to do |format|
       if @reserva.update_attributes(params[:reserva])
@@ -102,7 +116,7 @@ class ReservasController < ApplicationController
     @reserva.destroy
 
     respond_to do |format|
-      format.html { redirect_to reservas_url }
+      format.html { redirect_to "/verMisReservas" }
       format.json { head :no_content }
     end
   end
@@ -126,21 +140,34 @@ class ReservasController < ApplicationController
   end
   
   def procesarBusqueda
+      
     @fecha = params[:fecha]
     @horaInicio = params[:horaInicio]
     @horaFin = params[:horaFin]
     
-    logger.info(@fecha+@horaInicio+@horaFin)
+    logger.info(@fecha+">>>"+@horaInicio+">>>"+@horaFin)
       
 
     @espacio_deportivos = EspacioDeportivo.where("id NOT IN (SELECT a.espacio_deportivo_id FROM reservas a 
                                        where a.fecha = ? 
-                                       and a.hora_inicio = ? and a.hora_fin= ?) ",
-                                       @fecha,@horaInicio,@horaFin)
+                                       and ((a.hora_inicio >= ? and a.hora_inicio< ?)
+                                       or (a.hora_fin > ? and a.hora_fin <= ?)     
+                                       or (a.hora_inicio = ? and a.hora_fin =?)                                                               
+                                       ))",
+                                       @fecha,
+                                       @horaInicio,@horaFin,
+                                       @horaInicio,@horaFin,
+                                       @horaInicio,@horaFin
+                                       )
+ 
+ 
   end
   
   def verCalendarioReservas
-    
+    logger.info(">>>encalendario")
+    @espacio_deportivo_id = params[:espacio_deportivo_id]
+    @listaReservas = Reserva.where("espacio_deportivo_id =?",@espacio_deportivo_id)
+    render(:layout => false)
   end
   
 end

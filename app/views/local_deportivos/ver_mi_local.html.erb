@@ -1,9 +1,9 @@
 <%= content_for :header do %>
     <%= link_to 'Locales Deportivos', local_deportivos_path, 'data-icon'=> 'back'  %>
   <h1>Información del local Deportivo</h1>    
-  	  <% if usuario_logueado && usuario_logueado.rol == "3"%>
+
        	<%= link_to 'Editar', edit_local_deportivo_path(@local_deportivo), 'data-role'=>'button', 'data-icon'=>'gear'  %>
-    <% end %>
+
     
   
 <% end %>
@@ -101,9 +101,9 @@ window.onload = function funcion1()
 	  <%= @local_deportivo.email %>
 	</p>
 	<p align="right">
-		 <% if usuario_logueado && usuario_logueado.rol == "3"%>
+		 
 		<%= link_to 'Listado de espacios deportivos', :controller => "espacio_deportivos", :action => "findbylocal", :id => @local_deportivo.id %>
-		 <% end %>
+		 
 	</p>
 </li>
 <li data-role="list-divider">Detalle</li>
@@ -131,16 +131,15 @@ window.onload = function funcion1()
     <p>Costo: <%= espacio_deportivo.costo %></p>
     <p>Capacidad: <%= espacio_deportivo.capacidad %></p>
     <p>Descripción: <%= espacio_deportivo.descripcion %></p>
+    <p>Local Deportivo: <%= espacio_deportivo.local_deportivo_id %></p>
      <p>
+     
     <%= link_to "Reservar", new_reserva_path(:espacio_deportivo_id => espacio_deportivo.id), 'data-theme'=>'a' %>
+    
     </p>
     </a>
     <p>
-    	
-     <% if usuario_logueado && usuario_logueado.rol == "3"%>
-       <%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %>
-    <% end %>
-    	
+       <%= link_to 'Editar', edit_espacio_deportivo_path(espacio_deportivo) %>    	
     </p> 
         <% end %>   
   </li>
@@ -158,18 +157,4 @@ window.onload = function funcion1()
   </div>		
 	</p>
 </li>
-<li data-role="list-divider">Deja Tus Comentarios en Facebook<li>
-
-
-
-<div class="fb-like" style="display: inline-block" data-href="<%=local_deportivo_url %>" data-send="true" data-layout="standard"  data-width="450" data-show-faces="true" data-action="like" data-font="arial">
-</div>
-	<br>
-	<br>
-
-<div class="fb-comments"  width="500px" data-href="<%=local_deportivo_url %>" data-num-posts="2" data-width="470"></div>
-	<br>	<br>
-
-</li>
-
 </ul>

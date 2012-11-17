@@ -1,15 +1,16 @@
 <%= form_for(@espacio_deportivo) do |f| %>
   <% if @espacio_deportivo.errors.any? %>
-    <div id="error_explanation">
-      <h2>Se encontraron <%=@espacio_deportivo.errors.count%> error(es) en validaciones:</h2>
+    <ul data-role="listview"  style="padding-top:25px; padding-left:25px; width:60%;"%>
+    <li data-role="list-divider" style= "background:red">Se encontraron <%=@espacio_deportivo.errors.count%> error(es) en validaciones:</li>
 
-      <ul>
       <% @espacio_deportivo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="font-size:12px; padding:3px;border-top-width: 0px; background-image:none;"><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+  </ul>
+  <br><br>
   <% end %>
+
+
 
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>Nombre</legend>
@@ -29,8 +30,12 @@
   </fieldset>
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>Local Deportivo</legend>
-    <%= f.number_field :local_deportivo_id %>
+    <%= f.text_field :local_deportivo_nombre, :value =>@local_deportivo.nombre, :disabled=>"disabled"  %>
   </fieldset>
+    
+    <%= f.hidden_field :local_deportivo_id, :value=>@local_deportivo.id %>
+    
+  
   <div class="actions">
     <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
   </div>

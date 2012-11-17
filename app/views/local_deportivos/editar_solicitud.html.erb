@@ -14,17 +14,18 @@
 <li>
 
 <%= form_for @local_deportivo,:url =>  "/confirmarSolicitud?id="+@local_deportivo.id.to_s   do |f| %>
-  <% if @local_deportivo.errors.any? %>
-    <div id="error_explanation">
-      <h2>Se encontraron <%=@local_deportivo.errors.count%> error(es) en validaciones:</h2>
+   <% if @local_deportivo.errors.any? %>
+    <ul data-role="listview"  style="padding-top:25px; padding-left:25px; width:60%;"%>
+    <li data-role="list-divider" style= "background:red">Se encontraron <%=@local_deportivo.errors.count%> error(es) en validaciones:</li>
 
-      <ul>
       <% @local_deportivo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="font-size:12px; padding:3px;border-top-width: 0px; background-image:none;"><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
-  <% end %>  
+  </ul>
+  <br><br>
+  <% end %>
+  
+   
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>Nombre</legend>
     <%= f.text_field :nombre %>
@@ -61,12 +62,11 @@
     <legend>Longitud</legend>
     <%= f.text_field :longitud %>
   </fieldset>
-  
-  
-  <div class="actions">
+  <br>
+
+  <div class="actions" data-role="controlgroup" data-type="horizontal">
     <%= f.submit 'Aceptar', 'data-icon'=>'check', 'data-theme'=>'b', :name => 'aceptar'%>
-    <%= f.submit 'Rechazar', 'data-icon'=>'check', 'data-theme'=>'b' %>
-    
+    <%= f.submit 'Rechazar','data-icon'=>'delete', 'data-theme'=>'a'%>
   </div>
 
 <% end %>

@@ -71,7 +71,11 @@ class LocalDeportivosController < ApplicationController
     @local_deportivo.usuario_id = usuario_logueado.id  
     
     if @local_deportivo.save
+         if(usuario_logueado.rol=="3")
          redirect_to root_url, :notice => "Su local sido creado satisfactoriamente!"
+         else
+         redirect_to root_url, :notice => "Se ha registrado una solicitud de creacion de Local Deportivo. Esta pendiente de aprobacion por un Administrador"
+         end
     else
           respond_to do |format|
             format.html { render action: "new" }
@@ -87,7 +91,7 @@ class LocalDeportivosController < ApplicationController
         
     respond_to do |format|
       if @local_deportivo.update_attributes(params[:local_deportivo])
-        format.html { redirect_to @local_deportivo, notice: 'Local deportivo fue actualizado correctamente.' }
+        format.html { redirect_to root_url, :notice => "Local Deportivo actualizado correctamente" }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -103,7 +107,7 @@ class LocalDeportivosController < ApplicationController
     @local_deportivo.destroy
 
     respond_to do |format|
-      format.html { redirect_to local_deportivos_url }
+      format.html { redirect_to root_url, :notice => "Se elimino correctamente el Local Deportivo" }
       format.json { head :no_content }
     end
   end
@@ -122,12 +126,14 @@ class LocalDeportivosController < ApplicationController
   end
   
   def confirmar_solicitud
-    logger.info(params[:id])
+    logger.info(params[:aceptar])
     @local_deportivo = LocalDeportivo.find(params[:id],  :conditions=> "estado = 'T'" )
     if(params[:aceptar])
       @local_deportivo.estado = "C"
+      mi_mensaje = "Se ha aprobado la solicitud seleccionada!"
     else
       @local_deportivo.estado = "R"
+       mi_mensaje = "Se ha rechazado la solicitud seleccionada!"
     end
 
     @usuario = @local_deportivo.usuario;
@@ -138,7 +144,7 @@ class LocalDeportivosController < ApplicationController
     end 
 
     if @local_deportivo.save
-      redirect_to root_url, :notice => "Su local sido creado satisfactoriamente!"
+        redirect_to root_url, :notice => mi_mensaje
     else
       
       
@@ -150,4 +156,16 @@ class LocalDeportivosController < ApplicationController
     @local_deportivos = LocalDeportivo.where("usuario_id=? AND estado='C'", usuario_logueado.id)
   end
   
+  
+  def ver_mi_local
+      @local_deportivo = LocalDeportivo.find(params[:id], :conditions=> "estado = 'C' OR estado is NULL")
+    
+    @espacio_deportivos = @local_deportivo.espacio_deportivos.find(:all)
+    
+    
+    respond_to do |format|
+      format.html 
+      format.json { render json: {:espacio_deportivos =>@espacio_deportivos, :local_deportivo => @local_deportivo }}
+    end
+  end
 end

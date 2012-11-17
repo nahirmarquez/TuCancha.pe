@@ -1,15 +1,15 @@
 <%= form_for(@evento_deportivo) do |f| %>
   <% if @evento_deportivo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@evento_deportivo.errors.count, "error") %> prohibited this evento_deportivo from being saved:</h2>
+    <ul data-role="listview"  style="padding-top:25px; padding-left:25px; width:60%;"%>
+    <li data-role="list-divider" style= "background:red">Se encontraron <%=@evento_deportivo.errors.count%> error(es) en validaciones:</li>
 
-      <ul>
       <% @evento_deportivo.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="font-size:12px; padding:3px;border-top-width: 0px; background-image:none;"><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+  </ul>
+  <br><br>
   <% end %>
+
 
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>Nombre</legend>

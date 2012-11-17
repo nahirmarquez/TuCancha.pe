@@ -2,8 +2,15 @@
   <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
   <h1>Busqueda de Locales Deportivos</h1>  
 <% end %>
+  
+
+<br>
+<input  data-theme="a" data-shadow="true" name="commit" type="button" onclick="javascript:window.location ='/buscarDisponibilidad';"  value="Busqueda Avanzada" class="ui-btn-hidden" aria-disabled="false">
+
+<br><br>
       
 <ul data-role="listview" data-filter="true" data-inset="true">
+
 <li data-role="list-divider">Listado de Locales Deportivos</li>
 <% @local_deportivos.each do |local_deportivo| %>
     <li>

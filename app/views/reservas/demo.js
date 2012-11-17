@@ -258,7 +258,7 @@ $(document).ready(function() {
    $("#confirmarFechaReserva").click(function() {
    
      if($MIEVENTO== undefined){
-       alert("Por favor seleccione una fecha para la reserva")       
+       alert("Por favor seleccione una fecha para la reserva2")       
      }else{
       alert($MIEVENTO)
       alert($MIEVENTO.start.getHours());

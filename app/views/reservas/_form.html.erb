@@ -1,71 +1,94 @@
+
+  <% 
+  @horasDia =      [["--Seleccione", ""],
+  				   ["00:00", "1"],
+  				   ["01:00", "1"],                             
+                   ["02:00", "2"],
+                   ["03:00", "3"],
+                   ["04:00", "4"],
+                   ["05:00", "5"],
+                   ["06:00", "6"],
+                   ["07:00", "7"],
+                   ["08:00", "8"],
+                   ["09:00", "9"],
+                   ["10:00", "10"],
+                   ["11:00", "11"],
+                   ["12:00", "12"],
+                   ["13:00", "13"],
+                   ["14:00", "14"],
+                   ["15:00", "15"],
+                   ["16:00", "16"],
+                   ["17:00", "17"],
+                   ["18:00", "18"],
+                   ["19:00", "19"],
+                   ["20:00", "20"],
+                   ["21:00", "21"],
+                   ["22:00", "22"],
+                   ["23:00", "23"]                                             
+                   ]
+  
+  
+  %>
+  
+
 <script>
 
-   function getEventData() {
 
-      return {
-         events : [
-            <% if @listaReservas !=nil %>
-              <% @listaReservas.each do |reserva| %>
-               <% if reserva.fecha != nil && reserva.hora_inicio !=nil && reserva.hora_fin != nil%>
-            {
 
-               "id":<%= reserva.id %>,
-               "start": new Date(<%= reserva.fecha.strftime("%Y")%>, 
-                                 <%= reserva.fecha.strftime("%m").to_i-1%>, 
-                                 <%= reserva.fecha.strftime("%d")%>, 
-                                 <%= reserva.hora_inicio%>),
-               "end": new Date(<%= reserva.fecha.strftime("%Y")%>, 
-                                 <%= reserva.fecha.strftime("%m").to_i-1%>, 
-                                 <%= reserva.fecha.strftime("%d")%>, 
-                                 <%= reserva.hora_fin%>),
-               
-               "title":"Hora Reservada",
-               readOnly : true
-            },
-                <% end %>
-			  <% end %>    
-			<% end%>
-			{
-               "id":6,
-               "start": new Date(2012, 1, 1, 8),
-               "end": new Date(2012, 1, 1, 10),
-               "title":"DEMO",
-               readOnly : true
-            }
-         ]
-      };
-   }
+
+
 
 
 function abrirCalendario(){
 	window.open('/calendario.html', 'Calendario', 'width=800,height=600')
 }
 
+
+
+
+function GetSelectValueFromChild(id, text)
+{
+
+  document.getElementById(id).selectedIndex = text-1;
+
+}
+
 function GetValueFromChild(id, text)
 {
+
   document.getElementById(id).value = text;
 }
 
 </script>
 
 <%= form_for(@reserva) do |f| %>
-  <% if @reserva.errors.any? %>
-    <div id="error_explanation">
-      <h2>Se encontraron <%=@reserva.errors.count%> error(es) en validaciones</h2>
+   <% if @reserva.errors.any? %>
+    <ul data-role="listview"  style="padding-top:25px; padding-left:25px; width:60%;"%>
+    <li data-role="list-divider" style= "background:red">Se encontraron <%=@reserva.errors.count%> error(es) en validaciones:</li>
 
-      <ul>
       <% @reserva.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="font-size:12px; padding:3px;border-top-width: 0px; background-image:none;"><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+  </ul>
+  <br><br>
   <% end %>
 
   <div class="field">
+  	<%= f.hidden_field :espacio_deportivo_id, :value=>@espacio_deportivo.id %>
     <%= f.label :espacio_deportivo_id %><br />
-    <%= f.text_field :espacio_deportivo_id, :maxlength=>'10', :style=>'width: 100px;', :value=>@espacio_deportivo.id %>
-    <a href="javascript:abrirCalendario()"> Ver Disponibilidad </a>
+    <%= f.text_field :espacio_deportivo_nombre, :maxlength=>'30', :disabled=>'disabled',:style=>'width: 300px;', :value=>@espacio_deportivo.nombre %>
+    
+    <%= link_to 'Ver disponibilidad', :controller => "reservas", :action => "verCalendarioReservas", :espacio_deportivo_id =>@espacio_deportivo.id%>
+    
+    
   </div>  
+
+  <div class="field">
+    <%= f.label :local_deportivo_id %><br />
+    <%= f.text_field :local_deportivo_nombre, :maxlength=>'30', :disabled=>'disabled',:style=>'width: 300px;', :value=>@local_deportivo.nombre %>
+  </div>  
+
+
   
   <div class="field">
   	<%= f.label :fecha %><br />
@@ -78,18 +101,22 @@ function GetValueFromChild(id, text)
   </div>
   
   
-  
+
   <div class="field">
     <%= f.label :hora_inicio %><br />
-    <%= f.text_field :hora_inicio %>
+    <%= f.select :hora_inicio, options_for_select(@horasDia,params[:horaInicio]), :id=>"reserva_hora_inicio"%>
   </div>
+  
+  
   <div class="field">
     <%= f.label :hora_fin %><br />
-    <%= f.text_field :hora_fin %>
+     <%= f.select :hora_fin, options_for_select(@horasDia,params[:horaFin]), :id=>"reserva_hora_fin"%>
   </div>
 
- 
+ <br>
   <div class="actions">
-    <%= f.submit 'Guardar', 'data-icon'=>'check', 'data-theme'=>'b' %>
+    <%= f.submit 'Reservar', 'data-icon'=>'check', 'data-theme'=>'b' %>
   </div>
 <% end %>
+
+

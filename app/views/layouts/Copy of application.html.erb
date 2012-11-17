@@ -23,17 +23,6 @@
   white-space: normal !important; 
 }
 </style>
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=281141371992155";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
     
     <script>
     $.mobile.ajaxEnabled = false;
@@ -122,35 +111,25 @@
 </head>
 <body>  
   <div data-role="page">
-    <div data-role="header">
-		<p align="center" data-position="fixed">
+    <div data-role="header" data-position="fixed">
+		<p align="center">
 			<%= image_tag("logo.png") %>
 		</p>       	 	
 	  	
-	  	
-	  	
-	  	<div  id="user_nav" align="right" class="ui-btn-right" >
-	  		
-
+	  	<div id="user_nav" align="right" class="ui-btn-right">
 		  <% if current_user %>
-		    <span class="ui-btn-inner ui-btn-corner-all" >
 		    Bienvenido,  <strong><%= current_user.name %></strong>!!   
-		     </span>
 		    <%= link_to "Cerrar Sesión", signout_path, 'data-role'=> 'button', 'data-icon'=>'facebook' %>
-		   
 		  <% else %>
 		      <% if usuario_logueado %>
-		           <span class="ui-btn-inner ui-btn-corner-all">
-		          Bienvenido,  <strong><%= usuario_logueado.nombre %> <%= usuario_logueado.apellido %></strong>!!!	 
-		          </span>	
+		          Bienvenido,  <strong><%= usuario_logueado.nombre %> <%= usuario_logueado.apellido %></strong>!!!	 	
 		          <%= link_to "Cerrar Sesión", salir_path, 'data-role'=> 'button', 'data-icon'=>'facebook' %>          
 		      <% else %>
 		        <%= link_to "Ingresar a la Aplicacion", "/login", 'data-role'=>'button', 'data-icon'=>'facebook', :rel => 'external' %>	
 		      <% end %>
 		  <% end %>
-
  
-		</div>	  	
+		</div>
 
       <%= yield :header %>
     </div>
@@ -165,6 +144,4 @@
     
   </div>
 </body>
-
-
 </html>

@@ -2,7 +2,20 @@
   <%= link_to "Home", root_path, 'data-icon'=> 'home' %>
 <% end %>
 
+<style>
+.ui-btn-inner { 
+  white-space: normal !important; 
+}
+</style>
 
+  <% if flash[:notice] %>
+<ul data-role="data-inline" >
+	
+<input  data-theme="e" name="commit" data-icon="check" type="button"  value="<%=flash[:notice]%>" class="ui-btn-hidden" aria-disabled="true">
+</ul>
+<br>
+  <% end %>
+  
 <ul>
 <li>
 	<%= link_to 'Reserva tu cancha', busqueda_path, 'data-role'=>'button', 'data-icon'=>'search' %>	
@@ -20,10 +33,6 @@
 </li>
 <li>
 	<%= link_to 'Registra tu cancha', local_deportivos_path, 'data-role'=>'button', 'data-icon'=>'grid' %>
-</li>
-
-<li>
-	<%= link_to 'Busca tu cancha', 'buscarDisponibilidad', 'data-role'=>'button', 'data-icon'=>'grid' %>
 </li>
 
 

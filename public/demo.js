@@ -1,3 +1,22 @@
+
+	function mostrarDialogo(mensaje) {
+	
+	  $("<div>").simpledialog2({
+	  	themeDialog: 'c',
+	    mode: 'button',
+	    headerText: 'Mensaje',
+	    headerClose: true,
+	    buttonPrompt: mensaje,
+	    buttons : {
+	      'Aceptar': {
+	        click: function () { 
+	          $('#buttonoutput').text('OK');
+	        }
+	      }
+	    }
+	  });
+	}
+
 $(document).ready(function() {   
    var $MIEVENTO;
    
@@ -71,9 +90,10 @@ $(document).ready(function() {
 
       },
       eventDrop : function(calEvent, $event) {
-        
+         $MIEVENTO = calEvent;
       },
       eventResize : function(calEvent, $event) {
+	     $MIEVENTO = calEvent;
       },
       eventClick : function(calEvent, $event) {
 
@@ -134,7 +154,7 @@ $(document).ready(function() {
 
       },
       data : function(start, end, callback) {
-         callback(window.opener.getEventData());
+         callback(getEventData());
       }
    });
 
@@ -143,44 +163,7 @@ $(document).ready(function() {
       $dialogContent.find("textarea").val("");
    }
 
-     function getEventData() {
-      var year = new Date().getFullYear();
-      var month = new Date().getMonth();
-      var day = new Date().getDate();
 
-      return {
-         events : 
-		/* 
-		 [
-            {
-               "id":1,
-               "start": new Date(year, month, day, 12),
-               "end": new Date(year, month, day, 13, 30),
-               "title":"Hora Reservada",
-               readOnly : true
-            
-			*/
-		 
-		 [
-		 
-		             {
-               "id":1,
-               "start": new Date(2012, 
-                                 9, 
-                                 21, 
-                                 9),
-               "end": new Date(2012, 
-                                 9, 
-                                 21, 
-                                 10),
-               "title":"Hora Reservada",
-               readOnly : true
-            }
-		]
-		
-		
-      };
-   }
 
 
    /*
@@ -241,42 +224,19 @@ $(document).ready(function() {
    var $about = $("#about");
 
    $("#confirmarFechaReserva").click(function() {
-   
-     if($MIEVENTO== undefined){
-       alert("Por favor seleccione una fecha para la reserva")       
+     
+	 if($MIEVENTO== undefined){
+		 redirectUrl = getUrlRefrescar("","","");
      }else{
-      //alert($MIEVENTO)
-      //alert($MIEVENTO.start.getHours());
-      //alert($MIEVENTO.start.getHours());
-	  fecha1 =  String($MIEVENTO.start.getFullYear() + "-" + ($MIEVENTO.start.getMonth()+1) + "-" + $MIEVENTO.start.getDate());
-	  window.opener.GetValueFromChild("fecha", fecha1);
-	  //window.opener.GetValueFromChild("fecha", $MIEVENTO.start.getFullYear() + "-" + $MIEVENTO.start.getMonth() + "-" + $MIEVENTO.start.getDate());
-	  window.opener.GetValueFromChild("reserva_hora_inicio", $MIEVENTO.start.getHours());
-	  window.opener.GetValueFromChild("reserva_hora_fin", $MIEVENTO.end.getHours());
+       
+	  fecha1 =  String($MIEVENTO.start.getFullYear() + "-" + ($MIEVENTO.start.getMonth()+1) + "-" + $MIEVENTO.start.getDate());	 
+	  horaInicio = $MIEVENTO.start.getHours();
+	  horaFin = $MIEVENTO.end.getHours();
 	  
-
-      //alert($MIEVENTO.start.getMonth()+$MIEVENTO.start.getMonth()+$MIEVENTO.start.getMonth()
-	  window.close();
+	  redirectUrl = getUrlRefrescar(fecha1,horaInicio,horaFin);
      }
-   //TODO
-      //document.getElementById("fechaSeleccionada").value
-      //document.getElementById("horaInicioSeleccionada").value
-      //document.getElementById("horaFinSeleccionada").value
-/*
-      $about.dialog({
-         title: "About this calendar demo",
-         width: 600,
-         close: function() {
-            $about.dialog("destroy");
-            $about.hide();
-         },
-         buttons: {
-            close : function() {
-               $about.dialog("close");
-            }
-         }
-      }).show();
-      */
+	  window.location = redirectUrl;
+	 
    });
 
 

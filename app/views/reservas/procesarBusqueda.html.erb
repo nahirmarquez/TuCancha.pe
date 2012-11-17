@@ -18,12 +18,12 @@
 	    <p><b>Capacidad:</b> <%= espacio_deportivo.capacidad %></p>
 	    <p><b>Costo:</b> <%= espacio_deportivo.costo %></p>
 	   
-	    <% if usuario_logueado%>
+
 	    <p><%= link_to "Reservar", new_reserva_path(:espacio_deportivo_id => espacio_deportivo.id, 
 	    											:fecha => @fecha,
 	                                                :horaInicio => @horaInicio,
 	                                                :horaFin=>@horaFin), 'data-theme'=>'a' %></p>
-	    <%end%>	    
+
 	</li>
 
 <% end %>

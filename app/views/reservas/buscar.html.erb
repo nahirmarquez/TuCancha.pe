@@ -1,34 +1,61 @@
+<link rel="stylesheet" type="text/css" href="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css" /> 
+<script type="text/javascript" src="http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js"></script>
+
 <script>
 
+function mostrarDialogo(mensaje) {
+
+  $("<div>").simpledialog2({
+  	themeDialog: 'c',
+    mode: 'button',
+    headerText: 'Mensaje',
+    headerClose: true,
+    buttonPrompt: mensaje,
+    buttons : {
+      'Aceptar': {
+        click: function () { 
+          $('#buttonoutput').text('OK');
+        }
+      }
+    }
+  });
+}
+
+
 function enviarDatosForm(){
-	alert("a");
+	
+fecha = document.getElementById("fecha").value
 horaInicio = document.getElementById("horaInicio").value
-	alert("a");
 horaFin = document.getElementById("horaFin").value
-	alert("a");
-	
-	alert(horaInicio)
-	alert("b")
-if(horaInicio ==null || horaInicio< 0 || horaInicio > 23  ){
-	alert("Por favor Ingrese un valor entre 0 y 23 para la hora de inicio");
+
+
+if(fecha =="" ){
+	mostrarDialogo("Por favor ingrese la fecha");
 	return;
 }
 
-if(horaFin == null || horaFin< 0 || horaFin > 23){
-	
-	alert("Por favor Ingrese un valor entre 0 y 23 para la hora de fin");
+if(horaInicio =="" || horaInicio< 0 || horaInicio > 23  ){
+	mostrarDialogo("Por favor ingrese un valor entre 0 y 23 para la hora de inicio");
 	return;
 }
 
-if(horaInicio>horaFin){
-	alert("La hora de Inicio debeser menor a la Hora de Fin");
+if(horaFin == "" || horaFin< 0 || horaFin > 23){
+	
+	mostrarDialogo("Por favor ingrese un valor entre 0 y 23 para la hora de fin");
 	return;
 }
-document.forms[0].submit
+
+if(parseInt(horaInicio)>parseInt(horaFin)){
+	mostrarDialogo("La hora de Inicio debe ser menor a la Hora de Fin");
+	return;
+}
+
+document.forms[0].submit();
 	
 }
 
 </script>
+
 
 
 <%= content_for :header do %>
@@ -37,6 +64,36 @@ document.forms[0].submit
   <%= link_to 'Regresar', :controller => "reservas", :action => "new", :espacio_deportivo_id => @espacio_deportivo_id %>  
  
 <% end %>
+
+  <% 
+  @horasDia =      [["--Seleccione", ""],
+                    ["01:00", "1"],                             
+                   ["02:00", "2"],
+                   ["03:00", "3"],
+                   ["04:00", "4"],
+                   ["05:00", "5"],
+                   ["06:00", "6"],
+                   ["07:00", "7"],
+                   ["08:00", "8"],
+                   ["09:00", "9"],
+                   ["10:00", "10"],
+                   ["11:00", "11"],
+                   ["12:00", "12"],
+                   ["13:00", "13"],
+                   ["14:00", "14"],
+                   ["15:00", "15"],
+                   ["16:00", "16"],
+                   ["17:00", "17"],
+                   ["18:00", "18"],
+                   ["19:00", "19"],
+                   ["20:00", "20"],
+                   ["21:00", "21"],
+                   ["22:00", "22"],
+                   ["23:00", "23"]                                              
+                   ]
+  
+  
+  %>
 
 
 <form accept-charset="UTF-8" action="/procesarBusqueda" method="post">
@@ -53,8 +110,37 @@ document.forms[0].submit
 
 <li>
 	<fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
-  	<div role="heading" class="ui-controlgroup-label">Hora Inicio</div><div class="ui-controlgroup-controls">    
-    <input id="horaInicio" name="horaInicio" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+  	<div role="heading" class="ui-controlgroup-label">Hora Inicio</div>
+  	
+
+  	<div class="ui-controlgroup-controls">    
+    <select id="horaInicio" name="horaInicio" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+    	<option value="">--Seleccione</option>
+		<option value="1">00:00</option>
+		<option value="1">01:00</option>
+		<option value="2">02:00</option>
+		<option value="3">03:00</option>
+		<option value="4">04:00</option>
+		<option value="5">05:00</option>
+		<option value="6">06:00</option>
+		<option value="7">07:00</option>
+		<option value="8">08:00</option>
+		<option value="9">09:00</option>
+		<option value="10">10:00</option>
+		<option value="11">11:00</option>
+		<option value="12">12:00</option>
+		<option value="13">13:00</option>
+		<option value="14">14:00</option>
+		<option value="15">15:00</option>
+		<option value="16">16:00</option>
+		<option value="17">17:00</option>
+		<option value="18">18:00</option>
+		<option value="19">19:00</option>
+		<option value="20">20:00</option>
+		<option value="21">21:00</option>
+		<option value="22">22:00</option>
+		<option value="23">23:00</option>    
+	</select>
     </div>
     </fieldset>
 </li>
@@ -62,7 +148,33 @@ document.forms[0].submit
 <li>
 	<fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
   	<div role="heading" class="ui-controlgroup-label">Hora Fin</div><div class="ui-controlgroup-controls">    
-    <input id="horaFin" name="horaFin" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+    <select id="horaFin" name="horaFin" type="number" class="ui-input-text ui-body-null ui-corner-all ui-shadow-inset ui-body-c">
+		<option value="">--Seleccione</option>
+		<option value="1">00:00</option>
+		<option value="1">01:00</option>
+		<option value="2">02:00</option>
+		<option value="3">03:00</option>
+		<option value="4">04:00</option>
+		<option value="5">05:00</option>
+		<option value="6">06:00</option>
+		<option value="7">07:00</option>
+		<option value="8">08:00</option>
+		<option value="9">09:00</option>
+		<option value="10">10:00</option>
+		<option value="11">11:00</option>
+		<option value="12">12:00</option>
+		<option value="13">13:00</option>
+		<option value="14">14:00</option>
+		<option value="15">15:00</option>
+		<option value="16">16:00</option>
+		<option value="17">17:00</option>
+		<option value="18">18:00</option>
+		<option value="19">19:00</option>
+		<option value="20">20:00</option>
+		<option value="21">21:00</option>
+		<option value="22">22:00</option>
+		<option value="23">23:00</option>    
+    </select>
     </div>
     </fieldset>
 </li>
@@ -73,7 +185,7 @@ document.forms[0].submit
  <br>
   <div class="actions">
     	<span class="ui-btn-inner ui-btn-corner-all">
-    		<input data-icon="check" data-theme="b" name="commit" type="submit"  value="Buscar" class="ui-btn-hidden" aria-disabled="false">
+    		<input data-icon="check" data-theme="b" name="commit" type="button" onclick="enviarDatosForm()"  value="Buscar" class="ui-btn-hidden" aria-disabled="false">
   </div>
   
 </form>

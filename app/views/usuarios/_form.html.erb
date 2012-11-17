@@ -1,15 +1,19 @@
 <%= form_for @usuario do |f| %>
   <% if @usuario.errors.any? %>
-    <div id="error_explanation">
-      <h2>Se encontraron <%=@usuario.errors.count%> error(es) en validaciones:</h2>
+  
+   <ul data-role="listview"  style="padding-top:25px; padding-left:25px; width:60%;"%>
+    <li data-role="list-divider" style= "background:red">Se encontraron <%=@usuario.errors.count%> error(es) en validaciones:</li>
 
-      <ul>
+
       <% @usuario.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li style="font-size:12px; padding:3px;border-top-width: 0px; background-image:none;"><%= msg %></li>
       <% end %>
-      </ul>
-    </div>
+  </ul>
+  <br><br>
   <% end %>  
+
+
+
   <fieldset data-role="controlgroup" data-type="horizontal">
     <legend>E-Mail</legend>
     <%= f.text_field :email %>

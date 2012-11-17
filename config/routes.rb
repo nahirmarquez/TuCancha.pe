@@ -41,6 +41,7 @@ match "/editarSolicitud" => "local_deportivos#editar_solicitud", :as => :editars
 match "/confirmarSolicitud" => "local_deportivos#confirmar_solicitud", :as => :confirmarsolicitud
 match "/rechazarSolicitud" => "local_deportivos#rechazar_solicitud", :as => :rechazarsolicitud
 match "/verMisLocales" => "local_deportivos#ver_mis_locales", :as => :vermislocales
+match "/verMiLocal" => "local_deportivos#ver_mi_local", :as => :vermilocal
 
 match "/busqueda" => "local_deportivos#busqueda", :as => :busqueda
 

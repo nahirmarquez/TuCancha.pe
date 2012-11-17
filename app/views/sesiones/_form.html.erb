@@ -3,23 +3,42 @@
    <% flash.each do |key, value| %>
         <div id="error_explanation" class="alert alert-<%= key %>"><%= value %></div>
     <% end %>
- 
-  <fieldset data-role="controlgroup" data-type="horizontal">
+ <ul data-role="listview" data-filter="false" data-inset="true">
+ <li>
+   <%= image_tag('futbol.jpg', :height => '100%', :width => '13%', :style=> 'max-width:none; max-height:none; min-width:100px')%>
+   <br>
+   <fieldset data-role="controlgroup" data-type="horizontal" style="padding-left:12%;">
     <legend>E-Mail</legend>
-    <%= text_field_tag :email, params[:email] %>
+    <%= text_field_tag :email, params[:email] , :style=>"width:90%;"%>
   </fieldset>
-  <fieldset data-role="controlgroup" data-type="horizontal">
+
+  <fieldset data-role="controlgroup" data-type="horizontal" style="padding-left:12%;">
     <legend>Password </legend>
-    <%= password_field_tag :password %>
+      <%= password_field_tag :password, "", :style=>"width:90%;" %>
   </fieldset>
- 
-   <%= link_to "Ingresar por Facebook", "/auth/facebook" %><br><br>
-   <%= link_to "Nuevo usuario", "usuarios/new" %>
- <br>
- <br>
-  <div class="actions">
-    <%= submit_tag 'Aceptar' , 'data-icon'=>'check', 'data-theme'=>'b' %>
-  </div>
+  <br>
   
+   </li>
+</ul>
+
+<br>
+
+  
+  <div class="actions" data-type="horizontal">
+    <%= submit_tag 'Aceptar' , 'data-icon'=>'check', 'data-theme'=>'b' %>
+      <br>
+    <%= link_to('Nuevo Usuario', '/usuarios/new', 'method'=>'get',"data-role"=>"button", "data-theme" => "a",'data-icon'=>'add', 'style'=> 'color:white;')  %>
+  </div>
+
+<br>
+  
+    <fieldset data-role="controlgroup" data-type="horizontal">
+
+<%= link_to '/auth/facebook' do %>
+  <%= image_tag('facebook.png')%>
+<% end %>
+
+  </fieldset>
+
 <% end %>
 
